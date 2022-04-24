@@ -20,6 +20,8 @@ public:
             else median = nums1[floor(nums1Size/2.0)];
             return median;
         }
+        else if(nums1.size() == 1 && nums2.size() == 1)
+            return (nums1[0]+nums2[0])/2.0;
         
         //Get median and index of median for nums1
         nums1Index = (nums1Size/2.0)-0.5;
@@ -37,12 +39,16 @@ public:
         bool nums2OOB = false;
         
         //Set current median, shift, and valid indices
-        double nextElement;
         median = nums1Med;
         shift = (nums2Size - 2*(nums2Index+1))/2.0;
         //Prevent out-of-bounds access on nums2
-        if(nums2Index<0) nums2Index = 0;
-        //Update nums1Index for correct comparisons
+        bool nums2IndexAtBottom = false;
+        if(nums2Index<0)
+        {
+            nums2Index = 0;
+            nums2IndexAtBottom = true;
+        }
+        //Update indices for correct comparisons
         if(nums1Index-floor(nums1Index) != 0)
         {
             if(shift<0) 
@@ -54,15 +60,30 @@ public:
             {
                 nums1Index = ceil(nums1Index);
                 shift += 0.5;
+                //possible ad-hoc fix
+                
+                if(!nums2IndexAtBottom) nums2Index++;
+                if(nums2Index>=nums2Size) nums2OOB = true;
             }
         }
         else
         {
             if(shift<0)
+            {
                 nums1Index--;
+                if(fmod(shift, 1) != 0)
+                    shift-=0.5;
+            }
             else if(shift>0)
+            {
                 nums1Index++;
-            
+                if(fmod(shift, 1) != 0) 
+                    shift+=0.5;
+                //nums2Index++;
+                if(!nums2IndexAtBottom) nums2Index++;
+                if(nums2Index>=nums2Size) nums2OOB = true;
+            }
+                
             if(nums1Index<0 || nums1Index>=nums1Size)
                 nums1OOB = true;
         }
