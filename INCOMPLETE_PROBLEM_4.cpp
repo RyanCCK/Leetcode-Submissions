@@ -3,6 +3,12 @@ POSSIBLE ISSUE:
 
 Incrementing nums1index and nums2index before shifting up the hypothetical merge array
 MAY cause skipping of elements that should not be skipped.  Look into this further.
+
+
+POSSIBLE ISSUE 2:
+A lot of this code is repetitive, performing the same function with very slight (if any) differences.
+Look into functions to eliminate this redundancy.
+Also, possible use of (+/-1) flag value to indicate direction when shifting through hypothetical array.
 */
 
 class Solution {
@@ -45,8 +51,8 @@ public:
                 median = nums1[nums1index];
                 //Find index in nums2 that is less than median
                 nums2index = nums2size-1;
-                while(nums2Index >= 0 && nums2[nums2index] >= median)
-                    nums2Index--;
+                while(nums2index >= 0 && nums2[nums2index] >= median)
+                    nums2index--;
                 nums2middle = (nums2size/2.0)-1;
                 //If nums2index is below nums2middle, shift upward to find median of merged array
                 if(nums2index<nums2middle)
@@ -88,8 +94,8 @@ public:
                 median = nums2[nums2index];
                 //Find index in nums1 that is less than median
                 nums1index = nums1size-1;
-                while(nums1Index >= 0 && nums1[nums1index] >= median)
-                    nums1Index--;
+                while(nums1index >= 0 && nums1[nums1index] >= median)
+                    nums1index--;
                 nums1middle = (nums1size/2.0)-1;
                 //If nums1index is below nums1middle, shift upward to find median of merged array
                 if(nums1index<nums1middle)
@@ -135,18 +141,72 @@ public:
             nums1index = nums1middle;
             //Set nums2 index to greatest index of an element less than the median
             nums2index = nums2size-1;
-            while(nums2Index >= 0 && nums2[nums2index] >= median)
-                nums2Index--;
+            while(nums2index >= 0 && nums2[nums2index] >= median)
+                nums2index--;
+            //If nums2index is below nums2middle, shift upward to find median of merged array
             if(nums2index<nums2middle)
             {
                 shift = nums2middle-nums2index;
-                //for-loop to shift requisite number of times up through the hypothetical merge array
-                //After loop terminates, one final update to median must be performed,
-                //  since it is not any particular element - but the average of the middle two. 
+                nums1index++;
+                nums2index++;
+                for(int i=0; i<shift; ++i)
+                {
+                    if(nums1index<nums1size && nums2index<nums2size)
+                        median = (nums1[nums1index] < nums2[nums2index]) ? nums1[nums1index++] : nums2[nums2index++];
+                    else if(nums1index<nums1size && nums2index>=nums2size)
+                        median = nums1[nums1index++];
+                    else if(nums1index>=nums1size && nums2index<nums2size)
+                        median = nums2[nums2index++];
+                }
+                //Since median must be between two indices, compute median
+                if(nums1index<nums1size && nums2index<nums2size)
+                    median += (nums1[nums1index] < nums2[nums2index]) ? nums1[nums1index] : nums2[nums2index];
+                else if(nums1index<nums1size && nums2index>=nums2size)
+                    median += nums1[nums1index];
+                else if(nums1index>=nums1size && nums2index<nums2size)
+                    median += nums2[nums2index];
+                median /= 2.0;
             }
+            //If nums2index is above nums2middle, shift downward to find median of merged array
+            else if(nums2index>nums2middle)
+            {
+                //this is needed to accurately compute median after shifting downward through array
+                double prevMedian = median;
+                
+                shift = nums2index-nums2middle;
+                nums1index--;
+                for(int i=0; i<shift; ++i)
+                {
+                    if(nums1index>=0 && nums2index>=0)
+                    {
+                        if(nums1[nums1index] > nums2[nums2index])
+                        {
+                            prevMedian = median;
+                            median = nums1[nums1index--];
+                        }
+                        else
+                        {
+                            prevMedian = median;
+                            median = nums2[nums2index--];
+                        }
+                    }
+                    else if(nums1index>=0 && nums2index<0)
+                    {
+                        prevMedian = median;
+                        median = nums1[nums1index--];
+                    }
+                    else if(nums1index<0 && nums2index>=0)
+                    {
+                        prevMedian = median;
+                        median = nums2[nums2index--];
+                    }
+                }
+                //Since median must be between two indices, compute median
+                median = (median+prevMedian)/2.0;
+            }
+            else median = (nums1[nums1index] + nums2[nums2index])/2.0;
         }
         
-        //If the size of each array is even
         /*
         else
         {
