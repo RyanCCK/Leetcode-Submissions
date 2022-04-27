@@ -1,14 +1,23 @@
 /*
-POSSIBLE ISSUE:
 
-Incrementing nums1index and nums2index before shifting up the hypothetical merge array
-MAY cause skipping of elements that should not be skipped.  Look into this further.
+LEETCODE PROBLEM 4 | Median of Two Sorted Arrays | 4/26/2022
 
+***********************************************************************************************************************
 
-POSSIBLE ISSUE 2:
-A lot of this code is repetitive, performing the same function with very slight (if any) differences.
-Look into functions to eliminate this redundancy.
-Also, possible use of (+/-1) flag value to indicate direction when shifting through hypothetical array.
+Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+
+The overall run time complexity should be O(log (m+n)).
+
+***********************************************************************************************************************
+
+Runtime: 55 ms, faster than 47.24% of C++ online submissions for Median of Two Sorted Arrays.
+Memory Usage: 89.4 MB, less than 48.97% of C++ online submissions for Median of Two Sorted Arrays.
+
+***********************************************************************************************************************
+
+A LOT OF THIS CODE IS REDUNDANT AND POORLY WRITTEN. 
+At some point in the future I plan to come back and re-write this solution, to clean it up and make it more efficient.
+
 */
 
 class Solution {
@@ -70,11 +79,10 @@ public:
                     }
                     else if(nums1[0]<median)
                     {
-                        if(nums1[0]>nums2[nums2index+1])
+                        if(nums1[0]>nums2[nums2index-1])
                             median = (median+nums1[0])/2.0;
-                        else median = (median+nums2[nums2index+1])/2.0;
+                        else median = (median+nums2[nums2index-1])/2.0;
                     }
-                    else median = (median+nums1[0])/2.0;
                 }
             }
             else if(nums2size==1)
@@ -104,11 +112,10 @@ public:
                     }
                     else if(nums2[0]<median)
                     {
-                        if(nums2[0]>nums1[nums1index+1])
+                        if(nums2[0]>nums1[nums1index-1])
                             median = (median+nums2[0])/2.0;
-                        else median = (median+nums1[nums1index+1])/2.0;
+                        else median = (median+nums1[nums1index-1])/2.0;
                     }
-                    else median = (median+nums2[0])/2.0;
                 }
             }
         }
@@ -150,11 +157,11 @@ public:
                     nums1index--;
                     for(int i=0; i<shift; ++i)
                     {
-                        if(nums1index>0 && nums2index>0)
+                        if(nums1index>=0 && nums2index>=0)
                             median = (nums1[nums1index]>nums2[nums2index]) ? nums1[nums1index--] : nums2[nums2index--];
-                        else if(nums1index>0 && nums2index<=0)
+                        else if(nums1index>=0 && nums2index<0)
                             median = nums1[nums1index--];
-                        else if(nums1index<=0 && nums2index>0)
+                        else if(nums1index<0 && nums2index>=0)
                             median = nums2[nums2index--];
                     }
                 }
@@ -193,11 +200,11 @@ public:
                     nums2index--;
                     for(int i=0; i<shift; ++i)
                     {
-                        if(nums2index>0 && nums1index>0)
+                        if(nums2index>=0 && nums1index>=0)
                             median = (nums2[nums2index]>nums1[nums1index]) ? nums2[nums2index--] : nums1[nums1index--];
-                        else if(nums2index>0 && nums1index<=0)
+                        else if(nums2index>=0 && nums1index<0)
                             median = nums2[nums2index--];
-                        else if(nums2index<=0 && nums1index>0)
+                        else if(nums2index<0 && nums1index>=0)
                             median = nums1[nums1index--];
                     }
                 }
@@ -261,7 +268,7 @@ public:
                 //this is needed to accurately compute median after shifting downward through array
                 double prevMedian = median;
                 
-                shift = nums2index-nums2middle;
+                shift = nums2index-nums2middle+1;
                 nums1index--;
                 for(int i=0; i<shift; ++i)
                 {
@@ -296,7 +303,9 @@ public:
             {
                 if(nums1index>0 && nums2index>0)
                 {
-                    median = (nums1[nums1index] + nums2[nums2index])/2.0;
+                    if(nums1[nums1index-1] > nums2[nums2index])
+                        median = (nums1[nums1index-1] + nums1[nums1index])/2.0;
+                    else median = (nums2[nums2index] + nums1[nums1index])/2.0;
                 }
                 else if(nums1index>0 && nums2index<=0)
                 {
