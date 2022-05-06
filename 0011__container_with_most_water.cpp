@@ -20,6 +20,9 @@ Memory Usage: 59 MB, less than 39.29% of C++ online submissions for Container Wi
 
 */
 
+//Maximum possible size for an element of height[]
+#define MAX_HEIGHT 100000
+
 class Solution {
 public:
     int maxArea(vector<int>& height) {
@@ -36,6 +39,8 @@ public:
         //Outer loop to set front index 
         for(int i=0; i<height.size(); ++i)
         {
+            //Exit loop if an area greater than maxArea can no longer be found
+            if(((height.size()-i-1)*MAX_HEIGHT) < maxArea) break;
             //Set terminal index for current front index
             terminalIndex = (height[i] != 0) ? ((maxArea/height[i])-1)+i : i+1;
             //Inner loop to set back index
@@ -65,3 +70,14 @@ public:
         return maxArea;
     }
 };
+
+/*
+
+Faster solution would be to start with two pointers, one at each end of height.
+Then move either pointer inward, moving whichever one points to the lesser value.
+(If both heights are equal at a given step then both pointers can be moved)
+Compute area at each step, and update the current maxArea along the way.
+
+This is guaranteed to find the maximum area in O(N) time.
+
+*/
