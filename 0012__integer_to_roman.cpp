@@ -201,3 +201,108 @@ public:
     }
 };
 */
+
+
+
+
+/*
+ANOTHER ALTERNATE SOLUTION, DESIGNED TO WORK WITH AN EXTENSIBLE ROMAN NUMERAL CHARACTER SET
+THIS WAS MADE UNDER THE INCORRECT ASSUMPTION THAT ROMAN NUMERALS EXTEND BEYOND THE SET DEFINED IN THE PROBLEM DESCRIPTION
+
+
+class Solution {
+public:
+    string intToRoman(int num) {
+        /*
+        Solution Intention:
+            
+        Use a 2D vector to store the symbols used to represent 1 and 5 in roman numerals.
+        Given v[x][y], x represents the place for the symbols: 
+            (0 = ones, 1 = tens, 2 = hundreds, etc.)
+        and the corresponding vector will have two elements:
+            y=0 holds the representation of 1*(place+1)
+            y=1 holds the representation of 5*(place+1)
+            
+        A while loop will iterate for the number of digits in num, with each iteration
+        popping the top number and passing it into a switch statement that will determine 
+        what string represents that digit at that place.
+        
+        THIS DESIGN IS meant to be extensible; it can accommodate any size set of roman numeral values,
+        simply by adding them into their correct index within the 2D vector.
+        */
+        /*
+        //Return this string
+        string roman("");
+        
+        //Set up vector to store roman numeral symbols for integer values
+        vector<vector<string>> symVals;
+        vector<string> onesVals {"I", "V"};
+        vector<string> tensVals {"X", "L"};
+        vector<string> hundredsVals {"C", "D"};
+        vector<string> thousandsVals{"M"};
+        symVals.push_back(onesVals);
+        symVals.push_back(tensVals);
+        symVals.push_back(hundredsVals);
+        symVals.push_back(thousandsVals);
+        
+        //Get number of digits and declare first digit variable
+        int digit, divisor = 1;
+        int numDigits = 0;
+        while(num/divisor != 0)
+        {
+            ++numDigits;
+            divisor *= 10;
+        }
+        
+        //Append to roman string while there are still digits to process
+        for(int i=0; i<numDigits; ++i)
+        {
+            digit = num/pow(10, numDigits-1-i);
+            num = (numDigits==1) ? num % 10 : num % (int) pow(10, numDigits-1-i);
+            
+            switch(digit)
+            {
+                case 1:
+                    roman += symVals[numDigits-1-i][0];
+                    break;
+                case 2:
+                    roman += symVals[numDigits-1-i][0];
+                    roman += symVals[numDigits-1-i][0];
+                    break;
+                case 3:
+                    roman += symVals[numDigits-1-i][0];
+                    roman += symVals[numDigits-1-i][0];
+                    roman += symVals[numDigits-1-i][0];
+                    break;
+                case 4:
+                    roman += symVals[numDigits-1-i][0];
+                    roman += symVals[numDigits-1-i][1];
+                    break;
+                case 5:
+                    roman += symVals[numDigits-1-i][1];
+                    break;
+                case 6:
+                    roman += symVals[numDigits-1-i][1];
+                    roman += symVals[numDigits-1-i][0];
+                    break;
+                case 7:
+                    roman += symVals[numDigits-1-i][1];
+                    roman += symVals[numDigits-1-i][0];
+                    roman += symVals[numDigits-1-i][0];
+                    break;
+                case 8:
+                    roman += symVals[numDigits-1-i][1];
+                    roman += symVals[numDigits-1-i][0];
+                    roman += symVals[numDigits-1-i][0];
+                    roman += symVals[numDigits-1-i][0];
+                    break;
+                case 9:
+                    roman += symVals[numDigits-1-i][0];
+                    roman += symVals[numDigits-i][0];
+                    break;
+            }
+        }
+        return roman;
+    }
+};
+*/
