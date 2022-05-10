@@ -19,6 +19,7 @@ strs[i] consists of only lower-case English letters.
 
 Runtime: 3 ms, faster than 87.93% of C++ online submissions for Longest Common Prefix.
 Memory Usage: 9.3 MB, less than 44.37% of C++ online submissions for Longest Common Prefix.
+
 */
 
 class Solution {
