@@ -25,6 +25,12 @@ Note:
 Only the space character ' ' is considered a whitespace character.
 Do not ignore any characters other than the leading whitespace or the rest of the string after the digits.
 
+
+Constraints:
+
+0 <= s.length <= 200
+s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.
+
 *****************************************************************************************************************************
 
 Runtime: 8 ms, faster than 25.17% of C++ online submissions for String to Integer (atoi).
