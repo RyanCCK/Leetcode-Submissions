@@ -10,6 +10,14 @@ You may assume that each input would have exactly one solution, and you may not 
 
 You can return the answer in any order.
 
+
+Constraints:
+
+2 <= nums.length <= 104
+-109 <= nums[i] <= 109
+-109 <= target <= 109
+Only one valid answer exists.
+
 *****************************************************************************************************************************
 
 Runtime: 316 ms, faster than 36.84% of C++ online submissions for Two Sum.
