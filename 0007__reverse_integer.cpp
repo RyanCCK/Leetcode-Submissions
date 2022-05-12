@@ -9,6 +9,11 @@ signed 32-bit integer range [-231, 231 - 1], then return 0.
 
 Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
 
+
+Constraints:
+
+-231 <= x <= 231 - 1
+
 *****************************************************************************************************************************
 
 Runtime: 4 ms, faster than 43.44% of C++ online submissions for Reverse Integer.
