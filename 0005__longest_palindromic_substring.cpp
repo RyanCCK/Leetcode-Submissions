@@ -6,6 +6,12 @@ LEETCODE PROBLEM 5 | Longest Palindromic Substring | 4/26/2022
 
 Given a string s, return the longest palindromic substring in s.
 
+
+Constraints:
+
+1 <= s.length <= 1000
+s consist of only digits and English letters.
+
 *****************************************************************************************************************************
 
 Runtime: 354 ms, faster than 32.10% of C++ online submissions for Longest Palindromic Substring.
