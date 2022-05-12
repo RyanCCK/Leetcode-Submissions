@@ -13,6 +13,13 @@ Return the maximum amount of water a container can store.
 
 Notice that you may not slant the container.
 
+
+Constraints:
+
+n == height.length
+2 <= n <= 105
+0 <= height[i] <= 104
+
 *****************************************************************************************************************************
 
 Runtime: 1506 ms, faster than 5.01% of C++ online submissions for Container With Most Water.
