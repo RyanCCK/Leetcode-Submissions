@@ -10,6 +10,13 @@ Add the two numbers and return the sum as a linked list.
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
+
+Constraints:
+
+The number of nodes in each linked list is in the range [1, 100].
+0 <= Node.val <= 9
+It is guaranteed that the list represents a number that does not have leading zeros.
+
 **************************************************************************************************
 
 Runtime: 40 ms, faster than 70.74% of C++ online submissions for Add Two Numbers.
