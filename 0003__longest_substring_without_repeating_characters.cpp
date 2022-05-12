@@ -6,6 +6,12 @@ LEETCODE PROBLEM 3 | Longest Substring Without Repeating Characters | 4/17/2022
 
 Given a string s, find the length of the longest substring without repeating characters.
 
+
+Constraints:
+
+0 <= s.length <= 5 * 104
+s consists of English letters, digits, symbols and spaces.
+
 ***********************************************************************************************************************
 
 Runtime: 680 ms, faster than 8.97% of C++ online submissions for Longest Substring Without Repeating Characters.
