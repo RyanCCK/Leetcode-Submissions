@@ -10,6 +10,11 @@ An integer is a palindrome when it reads the same backward as forward.
 
 For example, 121 is a palindrome while 123 is not.
 
+
+Constraints:
+
+-231 <= x <= 231 - 1
+
 *****************************************************************************************************************************
 
 Runtime: 8 ms, faster than 91.24% of C++ online submissions for Palindrome Number.
