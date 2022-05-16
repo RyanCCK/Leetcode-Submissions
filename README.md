@@ -6,7 +6,7 @@ All accepted submissions begin with a comment in the following format, including
 
 /*
 
-LEETCODE PROBLEM <#> | <Problem Name> | <Date Accepted>
+LEETCODE PROBLEM <#> | \<Problem Name> | \<Date Accepted>
 
 **************************************************************************************************
 
