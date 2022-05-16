@@ -11,13 +11,10 @@ LEETCODE PROBLEM <#> | \<Problem Name> | \<Date Accepted>
 **************************************************************************************************
 
 <Full Problem Description (excluding examples)>
- 
- 
- 
- 
   
-  
+<br>
 Constraints:
+
 \<List of All Constraints>
 
 **************************************************************************************************
