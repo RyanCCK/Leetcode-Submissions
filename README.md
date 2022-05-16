@@ -5,6 +5,8 @@ All accepted submissions begin with a comment in the following format, including
 
 <br>
 /*
+
+<br>
 <br>
 
 LEETCODE PROBLEM <#> | \<Problem Name> | \<Date Accepted>
@@ -20,8 +22,7 @@ Constraints:
 
 \**************************************************************************************************
 
-Runtime: \<Provided Runtime Information>
-
+Runtime: \<Provided Runtime Information><br>
 Memory Usage: \<Provided Memory Usage Information>
 
 */
