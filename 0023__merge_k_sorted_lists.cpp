@@ -20,8 +20,8 @@ The sum of lists[i].length will not exceed 104.
 
 **************************************************************************************************
 
-Runtime: 891 ms, faster than 6.80% of C++ online submissions for Merge k Sorted Lists.
-Memory Usage: 13 MB, less than 95.14% of C++ online submissions for Merge k Sorted Lists.
+Runtime: 346 ms, faster than 14.33% of C++ online submissions for Merge k Sorted Lists.
+Memory Usage: 12.9 MB, less than 99.21% of C++ online submissions for Merge k Sorted Lists.
 
 */
 
@@ -41,7 +41,7 @@ public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         //Guard against base cases
         if(lists.size() == 0) return nullptr;
-        if(lists.size() == 1) return lists[0];;
+        if(lists.size() == 1) return lists[0];
         
         
         //Declare variables
@@ -49,7 +49,6 @@ public:
         ListNode * head, * curr;    //Pointers to head of merged list and current node
         int least;                  //Least value between all nodes being compared,
         int leastIndex;             //Least value between all nodes being compared, and index in lists of that node's list
-        int numNull = 0;            //Number of null pointers in lists (each indicating end of list)
         
         
         //Find least-valued node in lists 
@@ -69,7 +68,11 @@ public:
                     leastIndex = i;
                 }
             }
-            else ++numNull;
+            else 
+            {
+                lists.erase(lists.begin()+i); 
+                --i;
+            }
         }
         
         
@@ -82,21 +85,19 @@ public:
         //Move pointer to least-valued node forward
         lists[leastIndex] = lists[leastIndex]->next;
         //Check if pointer is now null
-        if(lists[leastIndex] == nullptr) ++numNull;
+        if(lists[leastIndex] == nullptr) lists.erase(lists.begin()+leastIndex);
         
         
-        //Repeat this process until all lists have been merged (every pointer in lists points to null)
-        while(numNull < lists.size())
+        //Repeat this process until all lists have been merged
+        while(!lists.empty())
         {
             leastIndex = 0; //Reset leastIndex for each iteration
-            //Move leastIndex forward to index of first non-null pointer
-            while(lists[leastIndex] == nullptr) ++leastIndex;
-            least = lists[leastIndex]->val; //Reset least to value of first non-null node pointer in lists
+            least = lists[leastIndex]->val; //Reset least to value of first node in lists
             
             //Find actual least-valued node and the index of its list in lists
             for(int i=0; i<lists.size(); ++i)
             {
-                if(lists[i] != nullptr && lists[i]->val < least)
+                if(lists[i]->val < least)
                 {
                     least = lists[i]->val;
                     leastIndex = i;
@@ -105,7 +106,7 @@ public:
             
             curr->next = lists[leastIndex];
             lists[leastIndex] = lists[leastIndex]->next; 
-            if(lists[leastIndex] == nullptr) ++numNull;
+            if(lists[leastIndex] == nullptr) lists.erase(lists.begin()+leastIndex);
             curr = curr->next;  
         }
         
